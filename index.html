@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <title>Reservation System</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0"></script>
+    <!-- currently bootstrap is only used for header - for demo purposes only -->
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <style>
+        h1 {
+          margin-top: 0;
+        }
+       .section {
+        margin-top: 2em;
+       }
+       .footer {
+          background-color: rgb(236, 236, 236);
+          position: fixed;
+          width: 100%;
+          height:40px;
+          font-size: 16px;
+          margin-top: 5em;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          bottom: 0;
+          font-weight: 200;
+          text-align: center;
+       }
+       .decorator {
+          background-color: rgb(236, 236, 236);
+          width: 100%;
+          height:40px;
+          font-size: 16px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          text-align: center;
+          font-weight: 500;
+       }
+       nav .list-group-item {
+          display:inline-block;
+       }
+       .nav-menu {
+        text-align: center; 
+       }
+
+        .test {
+        transition: all .5s ease;
+        }
+
+
+
+    /* unvisited link */
+    .list-group-item a:link {
+    color: #FF0000;
+    }
+
+    /* visited link */
+    .list-group-item a:visited {
+    color: #00FF00;
+    }
+
+    /* mouse over link */
+    .list-group-item a:hover {
+    color: #FF00FF;
+    }
+
+    /* selected link */
+    .list-group-item a:active {
+    color: #0000FF;
+    opacity: 0;
+    transform: translate3d(10px, 0, 0);
+    }
+
+    .float-container {
+    display:flex;
+}
+
+    .float-child {
+        flex: 1;
+
+    }
+    .label-format  {
+        width: 20%;
+        text-align: left;
+    }
+    .number-setter {
+        width:60px;
+    }
+
+    </style>
+  </head>
+  <body>
+      <header class="decorator">Hotel Reservation System</header>
+     
+      <section>
+        <div class=" col-xs-8">
+            <div id="app" class=" panel container" style="padding-top: 2em;">
+                <div class="panel-body text-center">
+                    <router-view class="test"></router-view>
+                </div>
+            </div>
+        </div>   
+      <footer class="footer">
+        <div class="container">
+          <i>© 2021</i>
+        </div>
+      </footer>
+    <script src="./navigation.vue.js"></script>
+    <script src="./reservation.vue.js"></script>
+    <script src="./inventory.vue.js"></script>
+    <script src="./view-inventory.vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      Vue.component("Navigation", Navigation);
+      Vue.component("Reservation", Reservation);
+      Vue.component("Inventory", Inventory);
+      Vue.component("ViewInventory", ViewInventory);
+      Vue.use(VueRouter);
+
+      const routes = [
+        {
+          path: "/",
+          component: Reservation,
+        },
+        {
+          path: "/inventory",
+          component: Inventory,
+        },
+        {
+          path: "/viewInventory",
+          component: ViewInventory,
+        },
+      ];
+
+      const router = new VueRouter({
+        routes: routes,
+        mode: "history",
+        base: "/",
+      });
+
+      var app = new Vue({
+        el: "#app",
+        router: router,
+        data() {
+          return {
+            
+          };
+        },
+        methods: {
+          
+        },
+      });
+
+
+    </script>
+  </body>
+</html>
