@@ -21,7 +21,16 @@
                 </button>
             </div>
             </form>
+            <template v-if="countAvailability"> {{countAvailability}} timeslots are available</template>
             <table>
+            <caption>Total availability slots: </caption>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Available slots</th>
+                    <th scope="col">Resereved Time</th>
+                </tr>
                 <tr v-for="(values, key) in datalist" v-bind:key="key">
                 <th scope="row">{{ key + 1 }}</th>
                 <td v-for="(val, keyCol) in values"  v-bind:key="keyCol">{{ val }}</td>
@@ -36,6 +45,7 @@
           startDate: new Date(),
           endDate: new Date(),
           datalist: null,
+          countAvailability: 0,
 
       };
     },
@@ -54,6 +64,7 @@
                 .then(response => {
                     console.log(response);
                     this.datalist = response.data.body;
+                    this.countAvailability = this.datalist.reduce((sum, arr, counter)=> sum += parseInt(arr.reservation_nos), 0 )
                 }).catch(
                     function (error) {
                       console.log('Error while saving')
